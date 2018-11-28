@@ -33,41 +33,49 @@ import java.util.List;
 public class HeliumAuthServiceExtension implements AuthServiceExtension {
   private static final Logger logger = LoggerFactory.getLogger(HeliumAuthServiceExtension.class);
 
-  private static final ImmutableList<String> SUPPORTED_DATA_TYPES = ImmutableList.of("PHOTOS");
+  private static final ImmutableList<String> SUPPORTED_DATA_TYPES = ImmutableList.of("FILES");
 
   private boolean initialized = false;
 
   private HeliumAuthDataGenerator authDataGenerator;
 
-  public HeliumAuthServiceExtension() {}
+  public HeliumAuthServiceExtension() {
+    super();
+    System.out.println("HeliumAuthServiceExtension()");
+  }
 
   @Override
   public String getServiceId() {
-    return "Facebook";
+    System.out.println("HeliumAuthServiceExtension.getServiceId");
+    return "Helium";
   }
 
   @Override
   public AuthDataGenerator getAuthDataGenerator(
       String transferDataType, AuthServiceProviderRegistry.AuthMode mode) {
+    System.out.println("HeliumAuthServiceExtension.getAuthDataGenerator");
     return authDataGenerator;
   }
 
   @Override
   public List<String> getImportTypes() {
+    System.out.println("HeliumAuthServiceExtension.getImportTypes");
     return SUPPORTED_DATA_TYPES;
   }
 
   @Override
   public List<String> getExportTypes() {
+    System.out.println("HeliumAuthServiceExtension.getExportTypes");
     return SUPPORTED_DATA_TYPES;
   }
 
   @Override
   public void initialize(ExtensionContext context) {
+    System.out.println("HeliumAuthServiceExtension.initialize");
     if (initialized) return;
 
     AppCredentials appCredentials;
-    try {
+    /*try {
       appCredentials =
           context
               .getService(AppCredentialStore.class)
@@ -80,7 +88,7 @@ public class HeliumAuthServiceExtension implements AuthServiceExtension {
 
     authDataGenerator =
         new HeliumAuthDataGenerator(appCredentials, context.getService(HttpTransport.class));
-
+  */
     initialized = true;
   }
 }

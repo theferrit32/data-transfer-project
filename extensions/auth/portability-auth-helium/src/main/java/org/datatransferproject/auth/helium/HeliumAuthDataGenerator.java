@@ -94,14 +94,14 @@ public class HeliumAuthDataGenerator implements AuthDataGenerator {
 
   private AuthorizationCodeFlow createFlow() {
     return new AuthorizationCodeFlow.Builder(
-            BearerToken.authorizationHeaderAccessMethod(), // Access Method
-            httpTransport,
-            new JacksonFactory(),
-            new GenericUrl(TOKEN_SERVER_URL),
-            new ClientParametersAuthentication(
-                appCredentials.getKey(), appCredentials.getSecret()), // HttpExecuteInterecptor
-            appCredentials.getKey(), // client ID
-            AUTHORIZATION_SERVER_URL)
+        BearerToken.authorizationHeaderAccessMethod(), // Access Method
+        httpTransport,
+        new JacksonFactory(),
+        new GenericUrl(TOKEN_SERVER_URL),
+        new ClientParametersAuthentication(
+            appCredentials.getKey(), appCredentials.getSecret()), // HttpExecuteInterecptor
+        appCredentials.getKey(), // client ID
+        AUTHORIZATION_SERVER_URL)
         .setScopes(scopes)
         .build();
   }
