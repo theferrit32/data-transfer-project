@@ -76,6 +76,7 @@ dependencies {
     compile project(':extensions:auth:portability-auth-rememberthemilk')
     compile project(':extensions:auth:portability-auth-smugmug')
     compile project(':extensions:auth:portability-auth-twitter')
+    compile project(':extensions:auth:portability-auth-helium')
 
     compile project(':extensions:data-transfer:portability-data-transfer-flickr')
     compile project(':extensions:data-transfer:portability-data-transfer-google')
@@ -85,6 +86,7 @@ dependencies {
     compile project(':extensions:data-transfer:portability-data-transfer-rememberthemilk')
     compile project(':extensions:data-transfer:portability-data-transfer-smugmug')
     compile project(':extensions:data-transfer:portability-data-transfer-twitter')
+    compile project(':extensions:data-transfer:portability-data-transfer-helium')
 
     if (offlineData == 'true') {
         compile project(':extensions:auth:portability-auth-offline-demo')
