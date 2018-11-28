@@ -31,38 +31,41 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 public class HeliumTransferExtension implements TransferExtension {
-    private static final Logger logger = LoggerFactory.getLogger(HeliumTransferExtension.class);
-    private static final String SERVICE_ID = "Helium";
-    private boolean initialized = false;
+  private static final Logger logger = LoggerFactory.getLogger(HeliumTransferExtension.class);
+  private static final String SERVICE_ID = "Helium";
+  private boolean initialized = false;
 
-    private static final ImmutableList<String> SUPPORTED_SERVICES = ImmutableList.of("FILE");
-    private ImmutableMap<String, Importer> importerMap;
-    private ImmutableMap<String, Exporter> exporterMap;
+  private static final ImmutableList<String> SUPPORTED_SERVICES = ImmutableList.of("FILES");
+  private ImmutableMap<String, Importer> importerMap;
+  private ImmutableMap<String, Exporter> exporterMap;
 
-    @Override
-    public String getServiceId() {
-        return SERVICE_ID;
-    }
+  @Override
+  public String getServiceId() {
+    return SERVICE_ID;
+  }
 
-    @Override
-    public Exporter<?, ?> getExporter(String transferDataType) {
-        Preconditions.checkArgument(initialized);
-        Preconditions.checkArgument(SUPPORTED_SERVICES.contains(transferDataType));
-        return exporterMap.get(transferDataType);
-    }
+  @Override
+  public Exporter<?, ?> getExporter(String transferDataType) {
+    System.out.println("HeliumTransferExtension.getExporter");
+    Preconditions.checkArgument(initialized);
+    Preconditions.checkArgument(SUPPORTED_SERVICES.contains(transferDataType));
+    return exporterMap.get(transferDataType);
+  }
 
-    @Override
-    public Importer<?, ?> getImporter(String transferDataType) {
-        Preconditions.checkArgument(initialized);
-        Preconditions.checkArgument(SUPPORTED_SERVICES.contains(transferDataType));
-        return importerMap.get(transferDataType);
-    }
+  @Override
+  public Importer<?, ?> getImporter(String transferDataType) {
+    System.out.println("HeliumTransferExtension.getImporter");
+    Preconditions.checkArgument(initialized);
+    Preconditions.checkArgument(SUPPORTED_SERVICES.contains(transferDataType));
+    return importerMap.get(transferDataType);
+  }
 
-    @Override
-    public void initialize(ExtensionContext context) {
-        if (initialized) return;
+  @Override
+  public void initialize(ExtensionContext context) {
+    System.out.println("HeliumTransferExtension.initialize");
+    if (initialized) return;
 
-        AppCredentials appCredentials;
+    AppCredentials appCredentials;
         /*try {
             appCredentials =
                     context
@@ -74,13 +77,13 @@ public class HeliumTransferExtension implements TransferExtension {
             return;
         }*/
 
-        ImmutableMap.Builder<String, Importer> importerBuilder = ImmutableMap.builder();
-        importerMap = importerBuilder.build();
+    ImmutableMap.Builder<String, Importer> importerBuilder = ImmutableMap.builder();
+    importerMap = importerBuilder.build();
 
-        ImmutableMap.Builder<String, Exporter> exporterBuilder = ImmutableMap.builder();
-        //exporterBuilder.put("PHOTOS", new FacebookPhotosExporter(appCredentials));
-        exporterMap = exporterBuilder.build();
+    ImmutableMap.Builder<String, Exporter> exporterBuilder = ImmutableMap.builder();
+    //exporterBuilder.put("PHOTOS", new FacebookPhotosExporter(appCredentials));
+    exporterMap = exporterBuilder.build();
 
-        initialized = true;
-    }
+    initialized = true;
+  }
 }
