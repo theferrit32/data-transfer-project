@@ -75,20 +75,20 @@ public class HeliumAuthServiceExtension implements AuthServiceExtension {
     if (initialized) return;
 
     AppCredentials appCredentials;
-    /*try {
+    try {
       appCredentials =
           context
               .getService(AppCredentialStore.class)
-              .getAppCredentials("FACEBOOK_KEY", "FACEBOOK_SECRET");
+              .getAppCredentials("HELIUM_KEY", "HELIUM_SECRET");
     } catch (IOException e) {
       logger.warn(
-          "Problem getting AppCredentials: {}. Did you set FACEBOOK_KEY and FACEBOOK_SECRET?", e);
+          "Problem getting AppCredentials: {}. Did you set HELIUM_KEY and HELIUM_SECRET?", e);
       return;
     }
 
     authDataGenerator =
         new HeliumAuthDataGenerator(appCredentials, context.getService(HttpTransport.class));
-  */
+
     initialized = true;
   }
 }

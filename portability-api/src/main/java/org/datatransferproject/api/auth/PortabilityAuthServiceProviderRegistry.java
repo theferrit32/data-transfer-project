@@ -46,6 +46,8 @@ public class PortabilityAuthServiceProviderRegistry implements AuthServiceProvid
 
     serviceProviderMap.forEach(
         (service, provider) -> {
+          //System.out.println(service.getClass().getCanonicalName());
+          //System.out.println(provider.getClass().getCanonicalName());
           List<String> importTypes = provider.getImportTypes();
           List<String> exportTypes = provider.getExportTypes();
           for (String type : importTypes) {
@@ -54,6 +56,7 @@ public class PortabilityAuthServiceProviderRegistry implements AuthServiceProvid
                 "TransferDataType [%s] is available for import but not export in [%s] AuthServiceExtension",
                 type,
                 service);
+            System.out.println("Adding type " + type + " for provider: " + provider.getServiceId());
             supportedImportTypesBuilder.add(type);
           }
           supportedExportTypesBuilder.addAll(exportTypes);

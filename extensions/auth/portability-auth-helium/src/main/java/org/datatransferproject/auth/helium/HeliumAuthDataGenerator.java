@@ -63,10 +63,11 @@ public class HeliumAuthDataGenerator implements AuthDataGenerator {
   @Override
   public AuthData generateAuthData(
       String callbackUrl, String authCode, String id, AuthData initialAuthData, String extra) {
+
     Preconditions.checkArgument(
-        Strings.isNullOrEmpty(extra), "Extra data not expected for Facebook oauth flow");
+        Strings.isNullOrEmpty(extra), "Extra data not expected for Helium oauth flow");
     Preconditions.checkArgument(
-        initialAuthData == null, "Earlier auth data not expected for Facebook oauth flow");
+        initialAuthData == null, "Earlier auth data not expected for Helium oauth flow");
     AuthorizationCodeFlow flow = createFlow();
     TokenResponse response;
     try {
@@ -86,6 +87,8 @@ public class HeliumAuthDataGenerator implements AuthDataGenerator {
       throw new RuntimeException(
           "Error calling AuthorizationCodeFlow.createAndStoreCredential ", e);
     }
+
+
     return new TokensAndUrlAuthData(
         credential.getAccessToken(),
         credential.getRefreshToken(),

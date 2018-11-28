@@ -24,6 +24,8 @@ import org.datatransferproject.spi.cloud.storage.AppCredentialStore;
 import org.datatransferproject.spi.transfer.extension.TransferExtension;
 import org.datatransferproject.spi.transfer.provider.Exporter;
 import org.datatransferproject.spi.transfer.provider.Importer;
+import org.datatransferproject.transfer.helium.files.HeliumFileExporter;
+import org.datatransferproject.transfer.helium.files.HeliumFileImporter;
 import org.datatransferproject.types.transfer.auth.AppCredentials;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,23 +67,24 @@ public class HeliumTransferExtension implements TransferExtension {
     System.out.println("HeliumTransferExtension.initialize");
     if (initialized) return;
 
-    AppCredentials appCredentials;
-        /*try {
-            appCredentials =
-                    context
-                            .getService(AppCredentialStore.class)
-                            .getAppCredentials("FACEBOOK_KEY", "FACEBOOK_SECRET");
-        } catch (IOException e) {
-            logger.warn(
-                    "Problem getting AppCredentials: {}. Did you set FACEBOOK_KEY and FACEBOOK_SECRET?", e);
-            return;
-        }*/
+    /*AppCredentials appCredentials;
+    try {
+      appCredentials =
+          context
+              .getService(AppCredentialStore.class)
+              .getAppCredentials("HELIUM_KEY", "HELIUM_SECRET");
+    } catch (IOException e) {
+      logger.warn(
+          "Problem getting AppCredentials: {}. Did you set HELIUM_KEY and HELIUM_SECRET?", e);
+      return;
+    }*/
 
     ImmutableMap.Builder<String, Importer> importerBuilder = ImmutableMap.builder();
+    importerBuilder.put("FILES", new HeliumFileImporter());
     importerMap = importerBuilder.build();
 
     ImmutableMap.Builder<String, Exporter> exporterBuilder = ImmutableMap.builder();
-    //exporterBuilder.put("PHOTOS", new FacebookPhotosExporter(appCredentials));
+    exporterBuilder.put("FILES", new HeliumFileExporter());
     exporterMap = exporterBuilder.build();
 
     initialized = true;

@@ -74,7 +74,7 @@ public class CreateTransferJobAction implements Action<CreateTransferJob, Transf
         registry.getAuthDataGenerator(job.exportService(), job.transferDataType(), EXPORT);
     Preconditions.checkNotNull(
         exportGenerator,
-        "Generator not found for type: %s, service: %s",
+        "Export generator not found for type: %s, service: %s",
         job.transferDataType(),
         job.exportService());
 
@@ -82,7 +82,7 @@ public class CreateTransferJobAction implements Action<CreateTransferJob, Transf
         registry.getAuthDataGenerator(job.importService(), job.transferDataType(), IMPORT);
     Preconditions.checkNotNull(
         importGenerator,
-        "Generator not found for type: %s, service: %s",
+        "Import generator not found for type: %s, service: %s",
         job.transferDataType(),
         job.importService());
 
