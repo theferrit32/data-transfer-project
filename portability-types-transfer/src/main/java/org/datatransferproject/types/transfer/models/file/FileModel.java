@@ -23,18 +23,15 @@ public class FileModel extends DataModel {
     private final String id;
     private final String name;
     private final String description;
-    private final String owner;
 
     @JsonCreator
     public FileModel(
             @JsonProperty("id") String id,
             @JsonProperty("name") String name,
-            @JsonProperty("description") String description,
-            @JsonProperty("owner") String owner) {
+            @JsonProperty("description") String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.owner = owner;
     }
 
     public String getName() {
@@ -48,7 +45,5 @@ public class FileModel extends DataModel {
     public String getId() {
         return id;
     }
-
-    public String getOwner() { return owner; }
 
 }

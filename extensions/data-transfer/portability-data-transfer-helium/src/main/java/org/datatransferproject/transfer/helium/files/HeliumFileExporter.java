@@ -15,6 +15,7 @@ import java.util.UUID;
 
 public class HeliumFileExporter implements Exporter<TokensAndUrlAuthData, FileContainer> {
 
+  private final String DOSEndpoint = "https://helium.commonsshare.org/dosapi/";
   @Override
   public ExportResult<FileContainer> export(
       UUID jobId,
@@ -22,17 +23,15 @@ public class HeliumFileExporter implements Exporter<TokensAndUrlAuthData, FileCo
       Optional<ExportInformation> exportInformation)
       throws Exception {
     ArrayList<FileModel> exportedFiles = new ArrayList<FileModel>();
-    String endpoint = "";
+
     String accessToken = "";
 
-    HeliumClient client = new HeliumClient(endpoint, accessToken);
-    HeliumConnection<FileModel> conn = new HeliumConnection<>(client);
-    //Iterator<FileModel> iter = conn.iterator();
-    for (FileModel file : conn) {
+    HeliumClient client = new HeliumClient(DOSEndpoint, accessToken);
+    HeliumConnection conn = new HeliumConnection(client);
+
+    for (FileModel file : conn ) {
       exportedFiles.add(file);
     }
     return new ExportResult<FileContainer>(ExportResult.ResultType.END, new FileContainer(exportedFiles));
-
-
   }
 }
