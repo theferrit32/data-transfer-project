@@ -136,7 +136,9 @@ public class GooglePhotosExporter
     PaginationData nextPageData;
     String token = albumListResponse.getNextPageToken();
     List<PhotoAlbum> albums = new ArrayList<>();
-    GoogleAlbum[] googleAlbums = albumListResponse.getAlbums();
+    GoogleAlbum[] googleAlbums = Optional
+        .ofNullable(albumListResponse.getAlbums())
+        .orElse(new GoogleAlbum[0]);
 
     if (Strings.isNullOrEmpty(token)) {
       nextPageData = new StringPaginationToken(PHOTO_TOKEN_PREFIX);
